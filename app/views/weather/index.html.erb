@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather App</title>
+  <%= stylesheet_link_tag 'weather', media: 'all' %>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 120px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .app-title {
+      margin-bottom: 20px;
+    }
+
+    .welcome-message {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .city-heading {
+      margin-bottom: 10px;
+    }
+
+    .weather-form {
+      text-align: left;
+    }
+
+    .city-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .submit-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .submit-button:hover {
+      background-color: #0056b3;
+    }
+
+    .signup-login-links {
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="app-title">Weather App</h1>
+
+  <% if logged_in? %>
+    <p class="welcome-message">Welcome, <%= current_user.email %>!</p>
+    <h2 class="city-heading">Enter City Name:</h2>
+    <%= form_tag 'weather/show', method: :get, class: 'weather-form' do %>
+      <%= text_field_tag :city, nil, placeholder: 'Enter city name', class: 'city-input' %>
+      <%= submit_tag 'Get Weather', class: 'submit-button' %>
+    <% end %>
+  <% else %>
+    <p class="signup-login-links">
+      <%= link_to 'Signup', signup_path %> or <%= link_to 'Login', login_path %>
+    </p>
+  <% end %>
+</div>
+
+</body>
+</html>
