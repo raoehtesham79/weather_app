@@ -5,11 +5,16 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    exising_user = User.find_by(email: @user.email)
+    if exising_user.present?
+      flash.now[:alert] = "This Email Already Exists"
+      render :new and return
+    end
     if @user.save
       session[:user_id] = @user.id
-      redirect_to weather_path
+      redirect_to weather_index_path and return
     else
-      render :new
+      render :new and return
     end
   end
   
@@ -33,5 +38,11 @@ class UsersController < ApplicationController
       flash.now[:alert] = "Invalid email or password."
       render :login
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end

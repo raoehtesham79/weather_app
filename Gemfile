@@ -25,6 +25,15 @@ gem 'httparty'
 gem 'pry'
 gem 'dotenv-rails', groups: [:development, :test]
 
+gem 'rubocop', require: false
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'simplecov', require: false
+end
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

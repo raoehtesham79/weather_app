@@ -9,7 +9,7 @@ class WeatherController < ApplicationController
     url = URI("https://api.openweathermap.org/data/2.5/weather?q=#{city_name}&APPID=#{ENV['OPEN_WEATHER_API_KEY']}")
     response = HTTParty.get(url)
     data = JSON.parse(response.body)
-    binding.pry
+
     if data['cod'] == 200
       @weather = {
         city: data['name'],

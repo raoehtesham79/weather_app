@@ -60,6 +60,12 @@
 <div class="container">
   <h2>Sign Up</h2>
 
+  <% if flash[:alert].present? %>
+    <div class="alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
   <%= form_for(@user, url: users_path, method: 'post') do |f| %>
     <%= f.label :email %>
     <%= f.email_field :email, required: true %>

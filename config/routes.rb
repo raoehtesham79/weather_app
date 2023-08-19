@@ -22,11 +22,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :options do
-    member do 
-      get :common
-    end
-  end
-
   root 'common#index'
 end
